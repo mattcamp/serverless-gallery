@@ -8,8 +8,8 @@ Terraform is used to automatically deploy all the AWS resources.
 This started off as a small project which rapidly expanded, but it was a fun learning exercise.
 
 ### Workflow:
-* Users upload a collection of photos. These images are only viewable by a gallery admin (a Cognito user).
-* Admin selects from the uploaded images and adds them to a public gallery. Public galleries can be created new, or images can be added to an existing gallery.
+* Users upload a collection of photos directly to S3 using presigned URLS (signed by a lambda function). These images are only viewable by a gallery admin (a Cognito user). Another lambda automatically creates thumbnails.
+* Admin selects from the uploaded images and adds them to a public gallery. Public galleries can be created new, or images can be added to an existing gallery. Another lambda does the heavy lifting of copying files, etc.
 * Visitors view the galleries which are served directly out of a public S3 bucket. 
 
 ### How to install:
