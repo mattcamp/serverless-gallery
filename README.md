@@ -18,7 +18,7 @@ This started off as a small project which rapidly expanded, but it was a fun lea
 2. Install [Terraform](https://www.terraform.io/downloads.html) (at time of writing I was using v0.12.18)
 3. Build the lambda zip files. You need to cd into each subdirectory under `lambda/` and run `zip -r lambda.zip .`
 4. cd into `terraform/` 
-5. Edit `terraform/backend.tf` and set up your state bucket (you may need to create this first if using S3 terraform state). Also set your AWS region and the prefix which will be used when creating other S3 buckets.
+5. Edit `terraform/backend.tf` and set up your state bucket (you may need to create this first if using S3 terraform state). Also set your AWS region and replace `mtest` with your own prefix which will be used when creating other S3 buckets.
 6. Run `terraform init`
 7. Run `terraform plan` and if everything looks ok, `terraform apply`
 8. cd into `public-web` and run `aws s3 sync ./ s3://<your-s3-prefix>-gallery-public --acl public-read` to upload the files into the public bucket.
