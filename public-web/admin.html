@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DEEPRACING.IO Photo admin tool</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="gallery-admin.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/9bb58d32a4.js" crossorigin="anonymous"></script>
+
+    <!-- <script src="./script/jquery.min.js"></script> -->
+    <script src="./scripts/aws-sdk-2.487.0.min.js"></script>
+    <script src="./scripts/aws-cognito-sdk.min.js"></script>
+    <script src="./scripts/amazon-cognito-identity.min.js"></script>
+    <script src="./scripts/gallery-admin.js"></script>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <h5>DEEPRACING.IO Photo admin tool</h5>
+        </div>
+        <div class="col=1">
+            <input id="logOutButton" type="Button" value="Log Out" onclick="logOut()" style="display:none"
+                   class="btn btn-primary btn-sm">
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row" id="loginForm">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <form>
+                <div class="form-group">
+                    <label for="userNameInput">Email address</label>
+                    <input type="email" class="form-control" id="userNameInput">
+                    <div class="invalid-feedback">You must enter your email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id="passwordInput">
+                    <div class="invalid-feedback">You must enter your password</div>
+                </div>
+
+                <button type="button" id="logInButton" class="btn btn-primary" onclick="logIn()">Login</button>
+
+            </form>
+            <!-- <span id="message"></span> -->
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row" id="completeRegistrationForm" style="display:none">
+        <div class="col-1"></div>
+        <div class="col-10">
+            Please enter the following details to complete your user signup:<br>
+            <form>
+                <div class="form-group">
+                    <label for="nameInput">Please enter your name</label>
+                    <input type="text" class="form-control" id="nameInput">
+                    <div class="invalid-feedback">You must enter your name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="newPassword">Password</label>
+                    <input type="password" class="form-control" id="newPassword">
+                    <div class="invalid-feedback">You must enter your password</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmNewPassword">
+                    <div class="invalid-feedback">You must re-enter your password to confirm</div>
+                </div>
+
+                <button type="button" id="confirmButton" class="btn btn-primary"
+                        onclick="completeRegistration()">Complete Signup
+                </button>
+
+            </form>
+            <!-- <span id="message"></span> -->
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div id="loggedInView" style="display:none">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-1 navbar" id="navbar-left"></div>
+            <div class="col-8 navbar" id="navbar-mid">Select upload directory</div>
+            <div class="col-1 navbar" id="navbar-right"></div>
+            <div class="col-1"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="dirList"></div>
+                <div id="fileList" class="d-flex p-2 flex-wrap"></div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <!--                <input id="listS3ObjectsButton" type="button" value="Refresh bucket" onclick="getAWSS3BucketObjects()"-->
+                <!--                       style="display:none" class="btn btn-primary">-->
+                <input id="usePhotosButton" type="button" value="Use photos" onclick="showCreateModal()"
+                       style="display:none" class="btn btn-primary">
+
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+    </div>
+
+
+    <!-- <input id="nameInput" type="text" placeholder="Enter your name" style="display:none" /></br> -->
+    <!-- <input id="newPassword" type="password" placeholder="New password" style="display:none" /></br> -->
+    <!-- <input id="confirmNewPassword" type="password" placeholder="Confirm new password" style="display:none" /></br> -->
+    <!-- <input id="confirmButton" type="button" value="Confirm" onclick="completeRegistration()" -->
+    <!-- style="display:none" class="btn btn-primary"></br></br> -->
+    <!-- <input id="verifyCodeButton" type="button" value="Verify" onclick="verifyCode()" style="display:none"> -->
+
+    <!-- <input id="clearLogsButton" type="button" value="Clear Logs" onclick="clearLogs()" class="btn btn-primary"> -->
+
+    </br></br>
+    <div id="loader" class="loader" style="display:none"></div>
+    </br></br>
+    <div id="log" style="width: 500px; height: 300px; overflow-y: scroll;"></div>
+
+    <div class="modal" id="imageModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog mw-100 w-75" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="fullSizeImage" class="mw-100 w-100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="createModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog mw-100 w-75" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add images to public gallery</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="existingGallery">Select existing gallery to add images to</label>
+                            <select class="form-control" id="existingGallery">
+                                <option value="createnew">[Create new gallery]</option>
+                                <option value="test1">Test gallery 1</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newGallery">or enter a name to create a new gallery</label>
+                            <input type="text" class="form-control" id="newGallery">
+                        </div>
+
+                        <button type="button" id="useModalButton" class="btn btn-primary"
+                                onclick="useImages()">Go
+                        </button>
+                        <span id="createMsg"></span>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

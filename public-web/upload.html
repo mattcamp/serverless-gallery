@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DEEPRACING.IO Photo Upload tool</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="gallery.css">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/9bb58d32a4.js" crossorigin="anonymous"></script>
+
+    <script src="scripts/upload.js"></script>
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-9">
+            <h5>DEEPRACING.IO Photo gallery</h5>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            <h5><a href="index.html">
+                <button class="btn btn-primary"><i class="fas fa-arrow-left"></i></button>
+            </a> Photo upload tool
+            </h5>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" class="form-control" id="name">
+                    <div class="invalid-feedback">You must enter your name</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <div class="invalid-feedback">You must enter your email address</div>
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="event">Event name</label>
+                    <input type="text" class="form-control" id="event">
+                    <small id="eventHelp" class="form-text text-muted">What are these pictures of? e.g, "re:Invent
+                        2019"</small>
+                    <div class="invalid-feedback">You must enter an event name</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="agreetnc" required>
+                        <label class="form-check-label" for="agreetnc">
+                            I understand and agree that by uploading any images I am licensing them under the terms of a
+                            Creative Commons CC0 license.
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="uploadhere">Select files</label>
+                    <input type="file" class="form-control-file" id="uploadhere" multiple accept="image/jpeg,image/png">
+                </div>
+                <!-- <input id="uploadhere" type="file" multiple> -->
+                <button type="button" id="submitbutton" class="btn btn-primary">Upload</button>
+                <span
+                        id="test"></span>
+            </form>
+            <!-- <span id="message"></span> -->
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            <div class="progress">
+                <div id="total_progressbar" class="progress-bar" role="progressbar" aria-valuenow="0"
+                     aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+
+    </div>
+
+
+</body>
+
+</html>
