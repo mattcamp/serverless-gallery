@@ -5,9 +5,7 @@ var clientId = '1jva1aj3h7rbsc9vtcg9chhobc';
 var identityPoolId = 'eu-west-2:37a42613-5bfb-43b0-b14b-615bff19627f';
 var s3UploadBucket = "mtest-gallery-uploads";
 var galleryAdminFunction = "gallery-admin";
-var uploadsTable = "gallery-uploads";
 var albumsTable = "gallery-albums";
-var imagesTable = "gallery-images";
 //=============== AWS IDs ===============
 
 var cognitoUser;
