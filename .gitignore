@@ -1,6 +1,11 @@
 .idea
 .idea/*
 **/.terraform
+.DS_Store
+**/.DS_Store
+**/*.zip
+**/package-lock.json
+
 
 # Logs
 logs
